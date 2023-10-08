@@ -1,0 +1,84 @@
+Q1.  Declare a variable myAge and assign your age to it. Then, print the value of myAge to the console.
+
+A1.
+      class Main {
+        public static void main(String[] args) {
+        int myAge = 20;
+        System.out.println("My age is : " + myAge);
+        }
+      }
+
+//=======================================================================================================================================================================
+Q2. Calculate the area of a rectangle with a length of 10 units and a width of 5 units. Store the result in a variable and print it to the console.
+
+A2. 
+    import java.util.Scanner;
+    class Main {
+      public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int area;
+        System.out.print("Enter length: ");
+        int length = scanner.nextInt();
+        System.out.print("Enter breadth: ");
+        int breadth = scanner.nextInt();
+        
+        area = length*breadth;
+        System.out.println("Area is : "+area);
+        }
+    }
+
+//==========================================================================================================================================================================
+Q3. Write a Java program to swap the values of two variables x and y without using a temporary variable.
+import java.util.Scanner;
+class Main {
+    public static void main(String[] args) {
+       Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter Number 1 : ");
+        int num1 = scanner.nextInt();
+         System.out.print("Enter Number 2: ");
+        int num2 = scanner.nextInt();
+         System.out.println("Before Swapping : "+ num1 +" and "+ num2);
+         
+         num1 = num1+num2;
+         num2 = num1-num2;
+         num1 = num1 - num2;
+          System.out.println("After Swapping : "+ num1 +" and "+ num2);
+    }
+}
+
+//===============================================================================================================================================================================
+Q4.Write a Java program to find and print the maximum and minimum values for each of the primitive data types: byte, short, int, long, float, and double.
+A4.
+class Main {
+    public static void main(String[] args) {
+        System.out.println("Byte: Min = " + Byte.MIN_VALUE + ", Max = " + Byte.MAX_VALUE);
+        System.out.println("Short: Min = " + Short.MIN_VALUE + ", Max = " + Short.MAX_VALUE);
+        System.out.println("Int: Min = " + Integer.MIN_VALUE + ", Max = " + Integer.MAX_VALUE);
+        System.out.println("Long: Min = " + Long.MIN_VALUE + ", Max = " + Long.MAX_VALUE);
+        System.out.println("Float: Min = " + Float.MIN_VALUE + ", Max = " + Float.MAX_VALUE);
+        System.out.println("Double: Min = " + Double.MIN_VALUE + ", Max = " + Double.MAX_VALUE);
+  
+    }
+}
+
+//=================================================================================================================================================================================
+
+Q5.Write a java program that takes the user to input the minutes, and print the number of years and days for the minutes.
+A5.
+import java.util.Scanner;
+class Main {
+    public static void main(String[] args) {
+       double minutesInOneYear = 365 *24*60  ;
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Input the number of minutes: ");
+
+        double min = sc.nextDouble();
+
+        long years = (long) (min / minutesInOneYear);
+        int days = (int) (min / 60 / 24) % 365;
+        System.out.print("");
+    }
+}
