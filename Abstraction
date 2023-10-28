@@ -1,0 +1,97 @@
+Q1. Create an abstract class Animal with the abstract method makeSound(). Define two concrete subclasses, Dog and Cat, 
+that extend the Animal class and implement the makeSound() method to print different sounds for each animal.
+A1.public class Main {
+    public static void main(String[] args) {
+        Animal dog = new Dog();
+        Animal cat = new Cat();
+
+        dog.makeSound();
+        cat.makeSound();
+    }
+}
+abstract class Animal {
+    public abstract void makeSound();
+}
+
+class Dog extends Animal {
+    @Override
+    public void makeSound() {
+        System.out.println("Dog barks");
+    }
+}
+
+class Cat extends Animal {
+    @Override
+    public void makeSound() {
+        System.out.println("Cat meows");
+    }
+}
+
+Q2. Can you create an instance of an abstract class in Java? Explain with an example.
+
+A2 . No, we cannot create an instance of an abstract class. 
+Abstract classes are meant to be extended by subclasses, and they may contain abstract methods that have no implementation. 
+We can only create instances of concrete subclasses that provide implementations for all abstract methods. For example :
+abstract class AbstractClass {
+    public abstract void someMethod();
+}
+
+class ConcreteClass extends AbstractClass {
+    public void someMethod() {
+        // Some implementation
+    }
+}
+// AbstractClass obj = new AbstractClass(); // This is not allowed.
+ConcreteClass obj = new ConcreteClass(); // This is allowed.
+
+Q3. Can you have a non-abstract method in an abstract class that is also declared as abstract? How does this affect the class's behavior? 
+A3. Yes, we can have a non-abstract method in an abstract class that is declared as abstract. This is allowed in Java, and it does not affect the class's behavior. 
+The class remains abstract until all abstract methods are implemented.
+
+Q4.  You have an abstract class Vehicle with an abstract method drive(). You want to create a subclass Car that is not abstract and provides an implementation for drive(). 
+However, you also want to create another subclass Bicycle that is abstract and leaves drive() unimplemented. Is this design possible in Java? Explain.
+A4.  Yes, it is possible in Java to have a subclass that is not abstract and provides an implementation for an abstract method 
+while having another subclass that is abstract and leaves the same method unimplemented. This design is allowed and is a valid use of abstract classes.
+
+Q5.  Create an abstract class Fruit with a property name and an abstract method taste().
+Implement two concrete subclasses, Apple and Banana, that extend the Fruit class and provide their own implementations of the taste() method.
+A5. public class Main {
+    public static void main(String[] args) {
+        Fruit apple = new Apple("Red Apple");
+        Fruit banana = new Banana("Yellow Banana");
+
+        apple.taste();  
+        banana.taste(); .
+    }
+}
+abstract class Fruit {
+    protected String name;
+
+    public Fruit(String name) {
+        this.name = name;
+    }
+
+    public abstract void taste();
+}
+
+class Apple extends Fruit {
+    public Apple(String name) {
+        super(name);
+    }
+
+    @Override
+    public void taste() {
+        System.out.println(name + " tastes sweet and crisp.");
+    }
+}
+
+class Banana extends Fruit {
+    public Banana(String name) {
+        super(name);
+    }
+
+    @Override
+    public void taste() {
+        System.out.println(name + " tastes creamy.");
+    }
+}
