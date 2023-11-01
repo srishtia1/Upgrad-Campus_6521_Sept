@@ -1,0 +1,176 @@
+Q1.Create a Java class called Person with private instance variables for name and age. 
+Implement getter and setter methods for both variables. Show how you would use these methods to set and retrieve the values.
+
+A1.  
+class Main {
+    public static void main(String[] args) {
+      Person person = new Person();
+person.setName("John");
+person.setAge(30);
+System.out.println("Name: " + person.getName());
+System.out.println("Age: " + person.getAge());
+    }
+}
+  class Person {
+    private String name;
+    private int age;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        if (age >= 0) {
+            this.age = age;
+        }
+    }
+}
+
+Q2.Create a class BankAccount with a private balance variable and methods deposit and withdraw that encapsulate access to the balance.
+Ensure that the withdraw method does not allow the balance to go negative.
+A2.
+class Main {
+    public static void main(String[] args) {
+      
+BankAccount account = new BankAccount();
+account.deposit(1000);
+account.withdraw(500);
+System.out.println("Balance: " + account.getBalance());
+    }
+}
+class BankAccount {
+    private double balance;
+
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+        }
+    }
+
+    public void withdraw(double amount) {
+        if (amount > 0 && balance >= amount) {
+            balance -= amount;
+        }
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+}
+
+Q3. Create a base class Vehicle with fields for make and model, 
+and a derived class Car that inherits from Vehicle with an additional field for year. Implement constructors for both classes, and demonstrate inheritance.
+
+A3.class Main {
+    public static void main(String[] args) {
+     Car car = new Car("Toyota", "Camry", 2023);
+System.out.println("Make: " + car.getMake());
+System.out.println("Model: " + car.getModel());
+System.out.println("Year: " + car.getYear());
+    }
+}
+class Vehicle {
+    private String make;
+    private String model;
+
+    public Vehicle(String make, String model) {
+        this.make = make;
+        this.model = model;
+    }
+
+    public String getMake() {
+        return make;
+    }
+
+    public String getModel() {
+        return model;
+    }
+}
+
+class Car extends Vehicle {
+    private int year;
+
+    public Car(String make, String model, int year) {
+        super(make, model);
+        this.year = year;
+    }
+
+    public int getYear() {
+        return year;
+    }
+}
+Q4. Create a base class Employee with fields for employeeId and salary, and a derived class Manager that inherits from Employee with an additional field for department.
+Implement constructors for both classes.
+
+A4. class Main {
+    public static void main(String[] args) {
+    
+Manager manager = new Manager(101, 75000.0, "HR");
+System.out.println("Employee ID: " + manager.getEmployeeId());
+System.out.println("Salary: " + manager.getSalary());
+System.out.println("Department: " + manager.getDepartment());
+    }
+}
+class Employee {
+    private int employeeId;
+    private double salary;
+
+    public Employee(int employeeId, double salary) {
+        this.employeeId = employeeId;
+        this.salary = salary;
+    }
+
+    public int getEmployeeId() {
+        return employeeId;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+}
+
+class Manager extends Employee {
+    private String department;
+
+    public Manager(int employeeId, double salary, String department) {
+        super(employeeId, salary);
+        this.department = department;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+}
+
+Q5.Consider the following Java code with two classes, Parent and Child. Predict the output of this code
+class Parent {
+    public void print() {
+        System.out.println("Parent");
+    }
+}
+
+class Child extends Parent {
+    public void print() {
+        System.out.println("Child");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Parent p = new Child();
+        p.print();
+    }
+}
+A5. The output of this code is "Child".
+
+
+
+
