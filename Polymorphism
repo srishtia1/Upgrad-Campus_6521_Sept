@@ -1,0 +1,74 @@
+Q1.Explain the concept of virtual method invocation in Java and its relationship to polymorphism.
+A1. In Java, all non-static methods are virtual by default. This means that the actual method that gets called is determined at runtime based on the object's type. Polymorphism enables 
+this behavior, allowing different classes to override and provide their own implementations of methods. This allows for dynamic method dispatch and is a key aspect of polymorphism.
+
+Q2.What is the purpose of the instanceof operator in Java, and how does it relate to polymorphism?
+A2. The instanceof operator is used to check whether an object is an instance of a particular class or interface. It is related to polymorphism because it allows you to determine if
+an object is of a certain type before attempting to perform a cast or call a specific method. This helps avoid runtime exceptions when dealing with polymorphic objects.
+
+Q3.Explain the concept of method hiding and how it differs from method overriding in the context of polymorphism.
+A3. Method hiding occurs when a subclass defines a static method with the same name and signature as a static method in its superclass. This is different from method overriding because it 
+is resolved at compile time, based on the reference type, not the actual object type. 
+Polymorphism doesn't apply to method hiding because it is a feature associated with class methods, not instance methods.
+
+Q4.Create a Java program that simulates a zoo. Define a base class Animal with a makeSound() method and two subclasses Lion and Elephant, each with their own makeSound() methods.
+Demonstrate polymorphism by creating an array of Animal objects and calling the makeSound() method on each object.
+A4. public class Main {
+    public static void main(String[] args) {
+      Lion l = new Lion();
+        Elephant e = new Elephant();
+        l.makeSound();
+        e.makeSound();
+    }
+}
+class Animal {
+    void makeSound() {
+        System.out.println("Animal makes a sound");
+    }
+}
+
+class Lion extends Animal {
+    @Override
+    void makeSound() {
+        System.out.println("Lion roars");
+    }
+}
+
+class Elephant extends Animal {
+    @Override
+    void makeSound() {
+        System.out.println("Elephant trumpets");
+    }
+}
+
+Q5.Create a Java program that models a simple bank account system. Define a base class Account with a method getBalance(), and two subclasses SavingsAccount and CheckingAccount. Implement the getBalance() method differently in each subclass. 
+Demonstrate polymorphism by creating objects of both subclasses and calling the getBalance() method.
+
+A5. public class Main {
+    public static void main(String[] args) {
+        Account savings = new SavingsAccount();
+        Account checking = new CheckingAccount();
+        
+        System.out.println("Savings Account Balance: $" + savings.getBalance());
+        System.out.println("Checking Account Balance: $" + checking.getBalance());
+    }
+}
+class Account {
+    double getBalance() {
+        return 0.0;
+    }
+}
+
+class SavingsAccount extends Account {
+    @Override
+    double getBalance() {
+        return 1000.0;
+    }
+}
+
+class CheckingAccount extends Account {
+    @Override
+    double getBalance() {
+        return 500.0;
+    }
+}
