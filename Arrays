@@ -1,0 +1,151 @@
+Q1. Write a Java function to find the maximum element in an array of integers.
+A.  public class MaxElementInArray {
+    public static int findMaxElement(int[] array) {
+        if (array == null || array.length == 0) {
+            throw new IllegalArgumentException("Array is empty or null");
+        }
+
+        int maxElement = array[0];
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] > maxElement) {
+                maxElement = array[i];
+            }
+        }
+        return maxElement;
+    }
+
+    public static void main(String[] args) {
+        int[] numbers = {3, 7, 1, 9, 4, 2, 6};
+        int max = findMaxElement(numbers);
+        System.out.println("Maximum element in the array: " + max);
+    }
+}
+Q2.Write a Java function to rotate elements of an array to the right by a given number of steps.
+A.public class RotateArray {
+    public static void rotateArray(int[] array, int steps) {
+        if (array == null || array.length == 0) {
+            throw new IllegalArgumentException("Array is empty or null");
+        }
+
+        int n = array.length;
+        steps = steps % n;
+        reverseArray(array, 0, n - 1);
+        reverseArray(array, 0, steps - 1);
+        reverseArray(array, steps, n - 1);
+    }
+
+    private static void reverseArray(int[] array, int start, int end) {
+        while (start < end) {
+            int temp = array[start];
+            array[start] = array[end];
+            array[end] = temp;
+            start++;
+            end--;
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] numbers = {1, 2, 3, 4, 5};
+        int steps = 2;
+        rotateArray(numbers, steps);
+        System.out.println("Rotated array: " + Arrays.toString(numbers));
+    }
+}
+
+Q3.Write a Java function to remove duplicates from a sorted array in-place and return the new length.
+A.public class RemoveDuplicates {
+    public static int removeDuplicates(int[] array) {
+        if (array == null || array.length == 0) {
+            return 0;
+        }
+
+        int uniqueIndex = 0;
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] != array[uniqueIndex]) {
+                uniqueIndex++;
+                array[uniqueIndex] = array[i];
+            }
+        }
+        return uniqueIndex + 1;
+    }
+
+    public static void main(String[] args) {
+        int[] numbers = {1, 1, 2, 2, 2, 3, 4, 4, 5};
+        int newLength = removeDuplicates(numbers);
+        System.out.println("New length after removing duplicates: " + newLength);
+        System.out.println("Array after removing duplicates: " + Arrays.toString(numbers));
+    }
+}
+
+Q4.Write a Java function to find the equilibrium index of an array (an index such that the sum of elements at lower indexes is equal to the sum of elements at higher indexes).
+A.public class EquilibriumIndex {
+    public static int findEquilibriumIndex(int[] array) {
+        if (array == null || array.length == 0) {
+            return -1;
+        }
+
+        int totalSum = 0;
+        int leftSum = 0;
+
+        for (int num : array) {
+            totalSum += num;
+        }
+
+        for (int i = 0; i < array.length; i++) {
+            totalSum -= array[i];
+
+            if (leftSum == totalSum) {
+                return i;
+            }
+
+            leftSum += array[i];
+        }
+
+        return -1; // No equilibrium index found
+    }
+
+    public static void main(String[] args) {
+        int[] numbers = {-7, 1, 5, 2, -4, 3, 0};
+        int equilibriumIndex = findEquilibriumIndex(numbers);
+        System.out.println("Equilibrium Index: " + equilibriumIndex);
+    }
+}
+
+Q5.Write a Java function to find the intersection of two arrays.
+A.import java.util.*;
+
+public class ArrayIntersection {
+    public static int[] findIntersection(int[] nums1, int[] nums2) {
+        if (nums1 == null || nums2 == null || nums1.length == 0 || nums2.length == 0) {
+            return new int[0];
+        }
+
+        Set<Integer> set1 = new HashSet<>();
+        Set<Integer> result = new HashSet<>();
+
+        for (int num : nums1) {
+            set1.add(num);
+        }
+
+        for (int num : nums2) {
+            if (set1.contains(num)) {
+                result.add(num);
+            }
+        }
+
+        int[] intersection = new int[result.size()];
+        int index = 0;
+        for (int num : result) {
+            intersection[index++] = num;
+        }
+
+        return intersection;
+    }
+
+    public static void main(String[] args) {
+        int[] nums1 = {1, 2, 2, 1};
+        int[] nums2 = {2, 2};
+        int[] intersection = findIntersection(nums1, nums2);
+        System.out.println("Intersection of arrays: " + Arrays.toString(intersection));
+    }
+}
