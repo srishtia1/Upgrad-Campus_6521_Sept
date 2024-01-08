@@ -1,0 +1,230 @@
+Q1. Write a Java program to implement a stack that supports push, pop, top, and retrieving the minimum element in constant time.
+A.import java.util.Stack;
+
+public class MinStack {
+    Stack<Integer> mainStack;
+    Stack<Integer> minStack;
+
+    public MinStack() {
+        mainStack = new Stack<>();
+        minStack = new Stack<>();
+    }
+
+    public void push(int x) {
+        mainStack.push(x);
+        if (minStack.isEmpty() || x <= minStack.peek()) {
+            minStack.push(x);
+        }
+    }
+
+    public void pop() {
+        if (!mainStack.isEmpty()) {
+            if (mainStack.pop().equals(minStack.peek())) {
+                minStack.pop();
+            }
+        }
+    }
+
+    public int top() {
+        if (!mainStack.isEmpty()) {
+            return mainStack.peek();
+        }
+        throw new IllegalStateException("Stack is empty");
+    }
+
+    public int getMin() {
+        if (!minStack.isEmpty()) {
+            return minStack.peek();
+        }
+        throw new IllegalStateException("Stack is empty");
+    }
+
+    public static void main(String[] args) {
+        MinStack stack = new MinStack();
+        stack.push(3);
+        stack.push(5);
+        System.out.println("Top element: " + stack.top());
+        System.out.println("Minimum element: " + stack.getMin());
+        stack.pop();
+        System.out.println("Top element after pop: " + stack.top());
+    }
+}
+Q2.Write a Java program to check for balanced parentheses in an expression using a stack.
+A.import java.util.Stack;
+
+public class BalancedParentheses {
+    public static boolean isValid(String s) {
+        Stack<Character> stack = new Stack<>();
+
+        for (char c : s.toCharArray()) {
+            if (c == '(' || c == '{' || c == '[') {
+                stack.push(c);
+            } else if (c == ')' && !stack.isEmpty() && stack.peek() == '(') {
+                stack.pop();
+            } else if (c == '}' && !stack.isEmpty() && stack.peek() == '{') {
+                stack.pop();
+            } else if (c == ']' && !stack.isEmpty() && stack.peek() == '[') {
+                stack.pop();
+            } else {
+                return false; // Unmatched closing bracket
+            }
+        }
+
+        return stack.isEmpty(); // If stack is empty, all parentheses are balanced
+    }
+
+    public static void main(String[] args) {
+        String expression1 = "{[()]()}";
+        String expression2 = "[(])";
+
+        System.out.println("Is expression1 balanced? " + isValid(expression1));
+        System.out.println("Is expression2 balanced? " + isValid(expression2));
+    }
+}
+
+Q3.Write a Java program to evaluate a postfix expression using a stack.
+A.import java.util.Stack;
+
+public class PostfixEvaluation {
+    public static int evaluatePostfix(String expression) {
+        Stack<Integer> stack = new Stack<>();
+
+        for (char c : expression.toCharArray()) {
+            if (Character.isDigit(c)) {
+                stack.push(Character.getNumericValue(c));
+            } else {
+                int operand2 = stack.pop();
+                int operand1 = stack.pop();
+
+                switch (c) {
+                    case '+':
+                        stack.push(operand1 + operand2);
+                        break;
+                    case '-':
+                        stack.push(operand1 - operand2);
+                        break;
+                    case '*':
+                        stack.push(operand1 * operand2);
+                        break;
+                    case '/':
+                        stack.push(operand1 / operand2);
+                        break;
+                }
+            }
+        }
+
+        return stack.pop();
+    }
+
+    public static void main(String[] args) {
+        String postfixExpression = "23*5+";
+        int result = evaluatePostfix(postfixExpression);
+        System.out.println("Result of postfix expression: " + result);
+    }
+}
+Q4.Write a Java program to implement a stack that efficiently supports finding the maximum element in the stack.
+A.import java.util.Stack;
+
+public class MaxElementStack {
+    Stack<Integer> mainStack;
+    Stack<Integer> maxStack;
+
+    public MaxElementStack() {
+        mainStack = new Stack<>();
+        maxStack = new Stack<>();
+    }
+
+    public void push(int x) {
+        mainStack.push(x);
+        if (maxStack.isEmpty() || x >= maxStack.peek()) {
+            maxStack.push(x);
+        }
+    }
+
+    public void pop() {
+        if (!mainStack.isEmpty()) {
+            if (mainStack.pop().equals(maxStack.peek())) {
+                maxStack.pop();
+            }
+        }
+    }
+
+    public int top() {
+        if (!mainStack.isEmpty()) {
+            return mainStack.peek();
+        }
+        throw new IllegalStateException("Stack is empty");
+    }
+
+    public int getMax() {
+        if (!maxStack.isEmpty()) {
+            return maxStack.peek();
+        }
+        throw new IllegalStateException("Stack is empty");
+    }
+
+    public static void main(String[] args) {
+        MaxElementStack stack = new MaxElementStack();
+        stack.push(3);
+        stack.push(5);
+        stack.push(2);
+        System.out.println("Top element: " + stack.top());
+        System.out.println("Maximum element: " + stack.getMax());
+        stack.pop();
+        System.out.println("Top element after pop: " + stack.top());
+    }
+}
+Q5. Write a Java program to implement a stack that supports push, pop, top, and retrieving the minimum element, all in constant time.
+A.import java.util.Stack;
+
+public class MinStackConstantTime {
+    Stack<Integer> mainStack;
+    int minElement;
+
+    public MinStackConstantTime() {
+        mainStack = new Stack<>();
+        minElement = Integer.MAX_VALUE;
+    }
+
+    public void push(int x) {
+        if (x <= minElement) {
+            mainStack.push(minElement);
+            minElement = x;
+        }
+        mainStack.push(x);
+    }
+
+    public void pop() {
+        if (mainStack.isEmpty()) {
+            return;
+        }
+
+        if (mainStack.pop() == minElement) {
+            minElement = mainStack.pop();
+        }
+    }
+
+    public int top() {
+        if (!mainStack.isEmpty()) {
+            return mainStack.peek();
+        }
+        throw new IllegalStateException("Stack is empty");
+    }
+
+    public int getMin() {
+        if (mainStack.isEmpty()) {
+            throw new IllegalStateException("Stack is empty");
+        }
+        return minElement;
+    }
+
+    public static void main(String[] args) {
+        MinStackConstantTime stack = new MinStackConstantTime();
+        stack.push(3);
+        stack.push(5);
+        System.out.println("Top element: " + stack.top());
+        System.out.println("Minimum element: " + stack.getMin());
+        stack.pop();
+        System.out.println("Top element after pop: " + stack.top());
+    }
+}
