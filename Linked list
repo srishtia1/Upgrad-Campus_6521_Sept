@@ -1,0 +1,235 @@
+Q1.Write a Java program to reverse a linked list.
+A. class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode(int val) {
+        this.val = val;
+    }
+}
+
+public class ReverseLinkedList {
+    public static ListNode reverseList(ListNode head) {
+        ListNode prev = null;
+        ListNode current = head;
+
+        while (current != null) {
+            ListNode nextTemp = current.next;
+            current.next = prev;
+            prev = current;
+            current = nextTemp;
+        }
+
+        return prev;
+    }
+
+    public static void main(String[] args) {
+        ListNode head = new ListNode(1);
+        head.next = new ListNode(2);
+        head.next.next = new ListNode(3);
+        head.next.next.next = new ListNode(4);
+
+        System.out.println("Original Linked List:");
+        printList(head);
+
+        ListNode reversedHead = reverseList(head);
+
+        System.out.println("\nReversed Linked List:");
+        printList(reversedHead);
+    }
+
+    private static void printList(ListNode node) {
+        while (node != null) {
+            System.out.print(node.val + " ");
+            node = node.next;
+        }
+    }
+}
+
+Q2.Write a Java program to detect a cycle in a linked list.
+A.class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode(int val) {
+        this.val = val;
+    }
+}
+
+public class DetectCycleLinkedList {
+    public static boolean hasCycle(ListNode head) {
+        if (head == null || head.next == null) {
+            return false;
+        }
+
+        ListNode slow = head;
+        ListNode fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+
+            if (slow == fast) {
+                return true; // Cycle detected
+            }
+        }
+
+        return false; // No cycle
+    }
+
+    public static void main(String[] args) {
+        ListNode head = new ListNode(1);
+        head.next = new ListNode(2);
+        head.next.next = new ListNode(3);
+        head.next.next.next = new ListNode(4);
+
+        // Creating a cycle (4 points back to 2)
+        head.next.next.next.next = head.next;
+
+        boolean hasCycle = hasCycle(head);
+        System.out.println("Does the linked list have a cycle? " + hasCycle);
+    }
+}
+
+Q3.Write a Java program to merge two sorted linked lists.
+a.class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode(int val) {
+        this.val = val;
+    }
+}
+
+public class MergeSortedLinkedLists {
+    public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        ListNode dummy = new ListNode(0);
+        ListNode current = dummy;
+
+        while (l1 != null && l2 != null) {
+            if (l1.val < l2.val) {
+                current.next = l1;
+                l1 = l1.next;
+            } else {
+                current.next = l2;
+                l2 = l2.next;
+            }
+            current = current.next;
+        }
+
+        if (l1 != null) {
+            current.next = l1;
+        }
+
+        if (l2 != null) {
+            current.next = l2;
+        }
+
+        return dummy.next;
+    }
+
+    public static void main(String[] args) {
+        ListNode l1 = new ListNode(1);
+        l1.next = new ListNode(2);
+        l1.next.next = new ListNode(4);
+
+        ListNode l2 = new ListNode(1);
+        l2.next = new ListNode(3);
+        l2.next.next = new ListNode(5);
+
+        ListNode mergedList = mergeTwoLists(l1, l2);
+        printList(mergedList);
+    }
+
+    private static void printList(ListNode node) {
+        while (node != null) {
+            System.out.print(node.val + " ");
+            node = node.next;
+        }
+    }
+}
+
+Q4.Write a Java program to delete a node in a singly linked list, given only that node.
+
+A.class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode(int val) {
+        this.val = val;
+    }
+}
+
+public class DeleteNodeLinkedList {
+    public static void deleteNode(ListNode nodeToDelete) {
+        if (nodeToDelete == null || nodeToDelete.next == null) {
+            throw new IllegalArgumentException("Invalid node to delete");
+        }
+
+        ListNode nextNode = nodeToDelete.next;
+        nodeToDelete.val = nextNode.val;
+        nodeToDelete.next = nextNode.next;
+    }
+
+    public static void main(String[] args) {
+        ListNode head = new ListNode(1);
+        head.next = new ListNode(2);
+        head.next.next = new ListNode(3);
+        head.next.next.next = new ListNode(4);
+
+        // Deleting node with value 2
+        deleteNode(head.next);
+
+        System.out.println("Linked List after deleting node:");
+        printList(head);
+    }
+
+    private static void printList(ListNode node) {
+        while (node != null) {
+            System.out.print(node.val + " ");
+            node = node.next;
+        }
+    }
+}
+
+Q5.Write a Java program to find the intersection point of two linked lists.
+A.class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode(int val) {
+        this.val = val;
+    }
+}
+
+public class IntersectionLinkedLists {
+    public static ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if (headA == null || headB == null) {
+            return null;
+        }
+
+        ListNode a = headA;
+        ListNode b = headB;
+
+        while (a != b) {
+            a = (a == null) ? headB : a.next;
+            b = (b == null) ? headA : b.next;
+        }
+
+        return a;
+    }
+
+    public static void main(String[] args) {
+        ListNode commonNode = new ListNode(3);
+
+        ListNode headA = new ListNode(1);
+        headA.next = new ListNode(2);
+        headA.next.next = commonNode;
+
+        ListNode headB = new ListNode(4);
+        headB.next = commonNode;
+
+        ListNode intersectionNode = getIntersectionNode(headA, headB);
+        System.out.println("Intersection Node Value: " + intersectionNode.val);
+    }
+}
